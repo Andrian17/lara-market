@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $guarded = ["id"];
 
     public function seller()
     {
-        return $this->belongsTo(Seller::class, 'id', 'seller_id');
+        return $this->belongsTo(Seller::class);
     }
 }

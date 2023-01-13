@@ -6,19 +6,9 @@
         @if (session()->has('message'))
             {!!  session('message') !!}
         @endif
-        @if ($errors->any())
-            <div class="alert alert-danger mt-3 p-3">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="bg-secondary text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Recent Salse</h6>
-                <a href="">Show All</a>
+            <div class="my-2 d-flex justify-content-start">
+                <a class="btn btn-outline-info " href="{{ route('product.create') }}"><i class="bi bi-plus-square me-2"></i>Add Product</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -40,15 +30,24 @@
                                 <td>{{ $product->name }}</td>
                                 <td>@currency($product->price)</td>
                                 <td >
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" style="max-width: 8rem;">
+                                    <div class="d-flex justify-content-center">
+                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" style="max-width: 8rem;">
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <a class="btn btn-sm btn-success me-2" href="/product/{{ $product->id }}"><i class="bi bi-ticket-detailed-fill"></i> Detail</a>
+                                        <a class="btn btn-sm btn-success me-2"
+                                        href="/product/{{ $product->id }}">
+                                            <i class="bi bi-ticket-detailed-fill"></i> Detail
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-info me-2"
+                                        href="/product/{{ $product->id }}/edit">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
                                         <form action="/product/{{ $product->id }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="confirm('Delete product {{ $product->name }} ?')"><i class="bi bi-trash"></i> Delete
+                                            <button type="submit" class="btn btn-sm btn-danger me-2" onclick="return confirm('Delete product {{ $product->name }} ?')"><i class="bi bi-trash"></i> Delete
                                             </button>
                                         </form>
                                     </div>

@@ -15,11 +15,7 @@
                 </ul>
             </div>
         @endif
-        <div class="bg-secondary text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Recent Salse</h6>
-                <a href="">Show All</a>
-            </div>
+        <div class="bg-secondary text-center rounded p-1">
             <div class="card bg-dark">
                 <div class="card-header">
                   Seller

@@ -19,5 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
+})->name('dashboard');
 Route::resource('/seller', SellerController::class);
 Route::resource('/product', ProductController::class);
