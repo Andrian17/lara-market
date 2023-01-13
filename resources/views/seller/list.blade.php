@@ -6,19 +6,9 @@
         @if (session()->has('message'))
             {!!  session('message') !!}
         @endif
-        @if ($errors->any())
-            <div class="alert alert-danger mt-3 p-3">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="bg-secondary text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Recent Salse</h6>
-                <a href="">Show All</a>
+            <div class="my-2 d-flex justify-content-start">
+                <a class="btn btn-outline-info " href="{{ route('seller.create') }}"><i class="bi bi-plus-square me-2"></i>Add Seller</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -41,10 +31,13 @@
                                     <form action="/seller/{{ $seller->id }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="confirm('Delete seller {{ $seller->name }} ?')">
+                                        <button type="submit" class="btn btn-sm btn-danger me-2" onclick="return confirm('Delete seller {{ $seller->name }} ?')">
                                             <i class="bi bi-trash"></i> Delete
                                         </button>
                                     </form>
+                                    <a href="/seller/{{ $seller->id }}/edit" class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-pencil-square"></i>Edit
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

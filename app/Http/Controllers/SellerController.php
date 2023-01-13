@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Seller;
 use App\Http\Requests\StoreSellerRequest;
 use App\Http\Requests\UpdateSellerRequest;
+use Illuminate\Support\Facades\Validator;
 
 class SellerController extends Controller
 {
@@ -15,7 +16,7 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $sellers = Seller::paginate(10);
+        $sellers = Seller::latest()->paginate(10);
         return view('seller.list', compact('sellers'));
     }
 
@@ -26,7 +27,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        //
+        return view('seller.create');
     }
 
     /**
@@ -37,7 +38,17 @@ class SellerController extends Controller
      */
     public function store(StoreSellerRequest $request)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required',
+            'address' => 'required'
+        ]);
+        if ($validator) {
+            Seller::create($validator);
+            return redirect()->route('seller.index')
+                ->with('message', '<div class="alert alert-info" role="alert">
+                                        Seller has saved
+                                   </div>');
+        }
     }
 
     /**
@@ -60,7 +71,8 @@ class SellerController extends Controller
      */
     public function edit(Seller $seller)
     {
-        //
+        // dd($seller);
+        return view('seller.edit', compact('seller'));
     }
 
     /**
@@ -72,7 +84,17 @@ class SellerController extends Controller
      */
     public function update(UpdateSellerRequest $request, Seller $seller)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required',
+            'address' => 'required'
+        ]);
+        if ($validator) {
+            $seller->update($validator);
+            return redirect()->route('seller.index')
+                ->with('message', '<div class="alert alert-info" role="alert">
+                                        Seller has updated
+                                   </div>');
+        }
     }
 
     /**

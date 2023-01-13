@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Seller;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(20);
+        $products = Product::latest()->paginate(20);
         return view('products.list', compact('products'));
     }
 
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $sellers = Seller::all();
+        return view('products.create', compact('sellers'));
     }
 
     /**
@@ -37,7 +39,20 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $validator = $request->validate([
+            'seller_id' => 'required',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'image_url' => 'required'
+        ]);
+        $validator['code_product'] = uniqid();
+        if ($validator) {
+            Product::create($validator);
+            return redirect()->route('product.index')
+                ->with('message', '<div class="alert alert-info" role="alert">
+                                    Product has save
+                               </div>');
+        }
     }
 
     /**
@@ -48,7 +63,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        dd($product);
+        return view('products.detail', compact('product'));
     }
 
     /**
@@ -59,7 +74,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -71,7 +86,18 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'image_url' => 'required'
+        ]);
+        if ($validator) {
+            $product->update($validator);
+            return redirect()->route('product.index')
+                ->with('message', '<div class="alert alert-info" role="alert">
+                                        Product has updated
+                                   </div>');
+        }
     }
 
     /**
@@ -82,6 +108,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            $product->delete();
+            return redirect()->route('product.index')
+                ->with('message', '<div class="alert alert-info" role="alert">
+                                        product has deleted
+                                    </div>');
+        } catch (\Throwable $th) {
+            return redirect()->route('product.index')
+                ->with('message', '<div class="alert alert-danger" role="alert">
+                                        failed to remove the product
+                                    </div>');
+        }
     }
 }
