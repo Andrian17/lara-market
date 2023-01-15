@@ -24,23 +24,27 @@
                   <h5 class="card-title">{{ $seller->name }}</h5>
                   <p class="card-text">{{ $seller->address }}</p>
                   <div class="list-products container">
-                    <p>List Prodcut By {{ $seller->name }}</p>
-                    <div class="row mx-auto">
-                        @foreach ($seller->products as $product)
-                        <div class="col-md-4 p-2 my-2">
-                            <div class="card">
-                                <a href="/product/{{ $product->id }}">
-                                    <img src="{{ $product->image_url }}" class="card-img-top" alt="product-{{ $product->name }}">
-                                </a>
-                                <div class="card-body">
-                                    <p class="card-text">code product : {{ $product->code_product }}</p>
-                                    <p class="card-text">{{ $product->name }}</p>
-                                    <p class="card-text">@currency($product->price)</p>
+                    @if (count($seller->products) > 0)
+                        <p>List Prodcut By {{ $seller->name }}</p>
+                        <div class="row mx-auto">
+                            @foreach ($seller->products as $product)
+                            <div class="col-md-4 p-2 my-2">
+                                <div class="card">
+                                    <a href="/product/{{ $product->id }}">
+                                        <img src="{{ $product->image_url }}" class="card-img-top" alt="product-{{ $product->name }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <p class="card-text">code product : {{ $product->code_product }}</p>
+                                        <p class="card-text">{{ $product->name }}</p>
+                                        <p class="card-text">@currency($product->price)</p>
+                                    </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
-                    </div>
+                    @else
+                        <p class="text-bold text-warning">Tidak ada produk untuk ditampilkan</p>
+                    @endif
 
                   </div>
                 </div>
