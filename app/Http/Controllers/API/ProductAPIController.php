@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProductController extends Controller
+class ProductAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -86,10 +87,23 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
-        Product::where("id", $id)->update($request->all());
-        return response([
-            "message" => "product has updated",
-        ]);
+        try {
+            $status = Product::where("id", $id)->update($request->all());
+            if ($status) {
+                return response([
+                    "message" => "product has updated",
+                ]);
+            }
+            return response(
+                ["message" => "id product not found"],
+                404
+            );
+        } catch (\Throwable $th) {
+            return response(
+                ["message" => "failed update product"],
+                400
+            );
+        }
     }
 
     /**

@@ -108,16 +108,16 @@ class SellerController extends Controller
     public function destroy(Seller $seller)
     {
         try {
-            DB::transaction(function () use ($seller) {
-                $seller->delete();
-                if (count($seller->products) > 0) {
-                    Product::where('seller_id', $seller->id)->delete();
-                }
-            });
+            DB::beginTransaction();
+            $seller->delete();
+            if (count($seller->products) > 0) {
+                Product::where('seller_id', $seller->id)->delete();
+            }
             return redirect()->route('seller.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
                                         Seller has deleted
-                                    </div>');
+                                   </div>');
+            DB::commit();
         } catch (\Exception $e) {
             // if error happened, rollback transaction
             DB::rollback();

@@ -19,7 +19,7 @@ class ProductFactory extends Factory
         return [
             'seller_id' => $this->faker->numberBetween(1, 15),
             'code_product' => uniqid(),
-            'name' => $this->faker->word(),
+            'name' => $this->faker->words(4, true),
             'price' => $this->faker->numberBetween(8000, 999999),
             'image_url' => $this->faker->imageUrl(320, 240, 'gadget')
         ];
