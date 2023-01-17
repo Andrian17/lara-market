@@ -1,5 +1,7 @@
 # Rest-API LaraMarket
 
+YouTube https://youtu.be/Orc-v8e4WmE
+
 CRUD API Product and Seller
 
 ## Desain database (Seller and Product)
