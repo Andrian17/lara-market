@@ -526,7 +526,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Laptop Acer Aspire 5\",\r\n    \"price\": 5000000,\r\n    \"image_url\": \"https://via.placeholder.com/320x240.png/006600?text=gadget+fuga\",\r\n    \"seller_id\": {{idSeller}}\r\n}",
+					"raw": "{\r\n    \"name\": \"Laptop Asus Zenbook Duo\",\r\n    \"price\": 5000000,\r\n    \"image_url\": \"https://via.placeholder.com/320x240.png/006600?text=gadget+fuga\",\r\n    \"seller_id\": {{idSeller}}\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -580,6 +580,122 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "errorGetProductById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/xxxxxxx",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"xxxxxxx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "errorUpdateProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Laptop Asus Zenbook Duo\",\r\n    \"price\": 5000000,\r\n    \"image_url\": \"https://via.placeholder.com/320x240.png/006600?text=gadget+fuga\",\r\n    \"seller_id\": {{idSeller}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/xxxxxxx",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"xxxxxxx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "errorDeleteProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.unset(\"tokenBearer\");\r",
+							"pm.collectionVariables.unset(\"idProduct\");\r",
+							"pm.collectionVariables.unset(\"idSeller\");\r",
+							"pm.collectionVariables.unset(\"search\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/xxxxxxx",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"xxxxxxx"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -614,17 +730,7 @@
 	],
 	"variable": [
 		{
-			"key": "tokenBearer",
-			"value": "",
-			"type": "string"
-		},
-		{
 			"key": "emailLogin",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "passwordLogin",
 			"value": "",
 			"type": "string"
 		},
@@ -634,17 +740,7 @@
 			"type": "string"
 		},
 		{
-			"key": "idProduct",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "idSeller",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "search",
+			"key": "passwordLogin",
 			"value": "",
 			"type": "string"
 		}
