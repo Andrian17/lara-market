@@ -55,19 +55,19 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Get All Seller
 
--   end point /resource-seller
--   method GET
+1.  end point /resource-seller
+2.  method GET
 
 #### Get Seller by id
 
--   end point /resource-seller/:id
--   method GET
+1.  end point /resource-seller/:id
+2.  method GET
 
 #### Add Seller
 
--   end point /resource-seller
--   method POST
--   body :
+1.  end point /resource-seller
+2.  method POST
+3.  body :
 
 <ul>
     <li>name : Seller1</li>
@@ -76,9 +76,9 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Update Seller
 
--   end point /resource-seller/:id
--   method PUT
--   body :
+1.  end point /resource-seller/:id
+2.  method PUT
+3.  body :
 
 <ul>
     <li>name : New Seller1</li>
@@ -87,8 +87,8 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Delete Seller
 
--   end point /resource-seller/:id
--   method DELETE
+1.  end point /resource-seller/:id
+2.  method DELETE
 
 <!-- Seller End -->
 
@@ -98,19 +98,19 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Get All Product
 
--   end point /resource-product
--   method GET
+1.  end point /resource-product
+2.  method GET
 
 #### Get Product by id
 
--   end point /resource-product/:id
--   method GET
+1.  end point /resource-product/:id
+2.  method GET
 
 #### Add Product
 
--   end point /resource-product
--   method POST
--   body :
+1.  end point /resource-product
+2.  method POST
+3.  body :
 
 <ul>
     <li>name : Product1</li>
@@ -121,9 +121,9 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Update Product
 
--   end point /resource-product/:id
--   method PUT
--   body :
+1.  end point /resource-product/:id
+2.  method PUT
+3.  body :
 
 <ul>
     <li>name : new Product1</li>
@@ -134,7 +134,7 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Delete Seller
 
--   end point /resource-product/:id
--   method DELETE
+1.  end point /resource-product/:id
+2.  method DELETE
 
 <!-- Product End -->
