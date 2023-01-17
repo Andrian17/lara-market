@@ -23,9 +23,9 @@ end point http://127.0.0.1:8000/api/
 
 ### Register
 
--   end point /register
--   method POST
--   body :
+1.  end point /register
+2.  method POST
+3.  body :
 
 <ul>
     <li>email : qwerty@gmail.com</li>
@@ -36,9 +36,9 @@ end point http://127.0.0.1:8000/api/
 
 ### Login
 
--   end point /login
--   method POST
--   body :
+1.  end point /login
+2.  method POST
+3.  body :
 
 <ul>
     <li>email : qwerty@gmail.com</li>
@@ -46,8 +46,11 @@ end point http://127.0.0.1:8000/api/
 </ul>
 
 returns a token, use it on Header Authorization : Bearer :token
-!![token-aurh](/example/token_auth.png)
-!![token-aurh](/example/header_auth.png)
+
+-   Token
+    ![token-aurh](/example/token_auth.png)
+-   Auth
+    ![token-aurh](/example/header_auth.png)
 
 <!-- Seller Start -->
 
