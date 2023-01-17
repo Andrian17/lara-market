@@ -1,5 +1,50 @@
 # Rest-API LaraMarket
 
+CRUD API Product and Seller
+
+## Desain database (Seller and Product)
+
+![tbl-seller-and-products](/example/lara-market.png)
+
+<div style="display: flex">
+    <table border="1">
+        <tr>
+            <td colspan="3">Seller</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>address</td>
+        </tr>
+        <tr>
+            <td>PK integer</td>
+            <td>varchar (100)</td>
+            <td>TEXT</td>
+        </tr>
+    </table>
+    <table border="1">
+        <tr>
+            <td colspan="6">Product</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>seller_id</td>
+            <td>code_product</td>
+            <td>name</td>
+            <td>price</td>
+            <td>image_url</td>
+        </tr>
+        <tr>
+            <td>PK integer</td>
+            <td>foreignID integer</td>
+            <td>char (32)</td>
+            <td>varchar (100)</td>
+            <td>integer</td>
+            <td>TEXT</td>
+        </tr>
+    </table>
+</div>
+
 ## Development
 
 1. Install dependencies using composer install
@@ -135,9 +180,60 @@ returns a token, use it on Header Authorization : Bearer :token
     <li>seller_id : select one id seller </li>
 </ul>
 
-#### Delete Seller
+#### Delete Product
 
 1.  end point /resource-product/:id
 2.  method DELETE
 
+#### Search Product
+
+1.  end point /resource-product/search/:name
+2.  method GET
+
 <!-- Product End -->
+
+<!-- CRUD -->
+
+## CRUD in Dashboard
+
+### Seller
+
+#### List Seller
+
+![list-seller](/example/Screenshot_16.png)
+
+#### Detail Seller
+
+![detail-seller](/example/Screenshot_17.png)
+
+### Product
+
+#### List Product
+
+![list-product](/example/Screenshot_15.png)
+
+#### Detail Product
+
+![detail-product](/example/Screenshot_18.png)
+
+#### Edit Product
+
+![edit-product](/example/Screenshot_19.png)
+
+## Dependeci
+
+### Composer (PHP)
+
+1. "laravel/sanctum": "^3.2",
+2. "laravel/ui": "^4.2",
+
+### NPM (Node JS) Default
+
+1. "@popperjs/core": "^2.11.6",
+2. "axios": "^1.1.2",
+3. "bootstrap": "^5.2.3",
+4. "laravel-vite-plugin": "^0.7.2",
+5. "lodash": "^4.17.19",
+6. "postcss": "^8.1.14",
+7. "sass": "^1.56.1",
+8. "vite": "^4.0.0"

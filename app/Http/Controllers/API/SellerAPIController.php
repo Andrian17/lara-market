@@ -38,7 +38,7 @@ class SellerAPIController extends Controller
         if ($validator->fails()) return response()->json($validator->errors(), 400);
         $seller = $request->all();
         $seller = Seller::create($seller);
-        return response(
+        return response()->json(
             [
                 "status" => 201,
                 "message" => "seller has been saved",
@@ -58,7 +58,7 @@ class SellerAPIController extends Controller
     {
         $seller = Seller::with('products')->find($id);
         if ($seller) return new SellerResource($seller);
-        return response([
+        return response()->json([
             "message" => "seller not found"
         ], 404);
     }
@@ -79,25 +79,18 @@ class SellerAPIController extends Controller
         if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
-        try {
-            $status = Seller::where("id", $id)->update($request->all());
-            if ($status) {
-                $seller = Seller::find($id);
-                return response([
-                    "message" => "seller has updated",
-                    "data" => $seller
-                ]);
-            }
-            return response(
-                ["message" => "id seller not found"],
-                404
-            );
-        } catch (\Throwable $th) {
-            return response(
-                ["message" => "failed update seller"],
-                400
-            );
+        $status = Seller::where("id", $id)->update($request->all());
+        if ($status) {
+            $seller = Seller::find($id);
+            return response()->json([
+                "message" => "seller has updated",
+                "data" => $seller
+            ]);
         }
+        return response()->json(
+            ["message" => "id seller not found"],
+            404
+        );
     }
 
     /**
@@ -126,7 +119,6 @@ class SellerAPIController extends Controller
                 ["message" => "seller has been removed"],
                 200
             );
-            // return false;
         } catch (\Exception $e) {
             // if error happened, rollback transaction
             DB::rollback();

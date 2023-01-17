@@ -41,7 +41,7 @@ class ProductAPIController extends Controller
         $product = $request->all();
         $product["code_product"] = uniqid();
         $product = Product::create($product);
-        return response(
+        return response()->json(
             [
                 "status" => 201,
                 "message" => "product has been saved",
@@ -63,7 +63,7 @@ class ProductAPIController extends Controller
         if ($product) {
             return new ProductResource($product);
         }
-        return response([
+        return response()->json([
             "status" => 404,
             "message" => "product not found!"
         ], 404);
@@ -87,25 +87,18 @@ class ProductAPIController extends Controller
         if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
-        try {
-            $status = Product::where("id", $id)->update($request->all());
-            if ($status) {
-                $product = Product::find($id);
-                return response([
-                    "message" => "product has been updated",
-                    "data" => $product
-                ]);
-            }
-            return response(
-                ["message" => "id product not found"],
-                404
-            );
-        } catch (\Throwable $th) {
-            return response(
-                ["message" => "failed to update product"],
-                400
-            );
+        $status = Product::where("id", $id)->update($request->all());
+        if ($status) {
+            $product = Product::find($id);
+            return response()->json([
+                "message" => "product has been updated",
+                "data" => $product
+            ]);
         }
+        return response()->json(
+            ["message" => "id product not found"],
+            404
+        );
     }
 
     /**
@@ -119,14 +112,26 @@ class ProductAPIController extends Controller
         $product = Product::find($id);
         if ($product) {
             $product->delete();
-            return response([
+            return response()->json([
                 "status" => 200,
                 "message" => "Product has been removed"
             ], 200);
         }
-        return response([
+        return response()->json([
             "status" => 404,
             "message" => 'failed to delete Product'
         ], 404);
+    }
+
+    // search
+    public function search($name)
+    {
+        $product = Product::where('name', 'like', "%" . $name . "%")->get();
+        if (count($product) < 1) {
+            return response()->json([
+                "message" => "product not found!"
+            ]);
+        }
+        return new ProductCollection($product);
     }
 }

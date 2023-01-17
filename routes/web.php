@@ -19,9 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.dashboard');
+    })->name('dashboard');
+    Route::resource('/seller', SellerController::class);
+    Route::resource('/product', ProductController::class);
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-})->name('dashboard');
-Route::resource('/seller', SellerController::class);
-Route::resource('/product', ProductController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

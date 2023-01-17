@@ -1,0 +1,652 @@
+{
+	"info": {
+		"_postman_id": "88fb6439-8738-4a50-8865-74359b2c05b2",
+		"name": "LaraMarket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19061582"
+	},
+	"item": [
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"tokenBearer\", res.data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"{{emailLogin}}\",\r\n    \"name\": \"{{nameLogin}}\",\r\n    \"password\": \"{{passwordLogin}}\",\r\n    \"c_password\": \"{{passwordLogin}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/register",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"tokenBearer\", res.data.token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"{{emailLogin}}\",\r\n    \"password\": \"{{passwordLogin}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/login",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSeller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idSeller\", res.data[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-seller",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-seller"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSellerById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idSeller\", res.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-seller/{{idSeller}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-seller",
+						"{{idSeller}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSeller",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/resource-seller/{{idSeller}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-seller",
+						"{{idSeller}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addSeller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idSeller\", res.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Seller 1\", \r\n    \"address\" : \"Jl. Yudhistira No. 14 Mataram NTB\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/resource-seller",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-seller"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSeller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idSeller\", res.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Seller 99\",\r\n    \"address\" : \"JL. Lanogaja Kota Bima\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/resource-seller/{{idSeller}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-seller",
+						"{{idSeller}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProducts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idProduct\", res.data[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idProduct\", res.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/{{idProduct}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"{{idProduct}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/{{idProduct}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"{{idProduct}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"idProduct\", res.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Laptop Acer Aspire 3\",\r\n    \"price\": 2500000,\r\n    \"image_url\": \"https://via.placeholder.com/320x240.png/006600?text=gadget+fuga\",\r\n    \"seller_id\": {{idSeller}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = pm.response.json()\r",
+							"pm.collectionVariables.set(\"search\", res.data.name);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Laptop Acer Aspire 5\",\r\n    \"price\": 5000000,\r\n    \"image_url\": \"https://via.placeholder.com/320x240.png/006600?text=gadget+fuga\",\r\n    \"seller_id\": {{idSeller}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/{{idProduct}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"{{idProduct}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenBearer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://lara-market.test/api/resource-product/search/{{search}}",
+					"protocol": "http",
+					"host": [
+						"lara-market",
+						"test"
+					],
+					"path": [
+						"api",
+						"resource-product",
+						"search",
+						"{{search}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "2|XaZA3jubuL72IvL9blbHm4tovFEHrcYGyFJdSdVJ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenBearer",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "emailLogin",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "passwordLogin",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "nameLogin",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "idProduct",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "idSeller",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "search",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
