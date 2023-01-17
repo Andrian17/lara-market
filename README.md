@@ -93,9 +93,9 @@ end point http://127.0.0.1:8000/api/
 returns a token, use it on Header Authorization : Bearer :token
 
 -   Token
-    ![token-aurh](/example/token_auth.png)
+    ![token-auth](/example/token_auth.png)
 -   Auth
-    ![token-aurh](/example/header_auth.png)
+    ![token-auth](/example/header_auth.png)
 
 <!-- Seller Start -->
 
@@ -105,6 +105,9 @@ returns a token, use it on Header Authorization : Bearer :token
 
 1.  end point /resource-seller
 2.  method GET
+
+Seller with Products (hasMany)
+![seller-with-products](/example/seller-with-products.png)
 
 #### Get Seller by id
 
@@ -148,6 +151,9 @@ returns a token, use it on Header Authorization : Bearer :token
 
 1.  end point /resource-product
 2.  method GET
+
+Product with Seller (belongsTo / hasOne / One2one)
+![product-with-seller](/example/product-with-seller.png)
 
 #### Get Product by id
 
