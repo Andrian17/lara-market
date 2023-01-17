@@ -23,9 +23,9 @@ end point http://127.0.0.1:8000/api/
 
 ### Register
 
-end point /register
-method POST
-body :
+-   end point /register
+-   method POST
+-   body :
 
 <ul>
     <li>email : qwerty@gmail.com</li>
@@ -36,9 +36,9 @@ body :
 
 ### Login
 
-end point /login
-method POST
-body :
+-   end point /login
+-   method POST
+-   body :
 
 <ul>
     <li>email : qwerty@gmail.com</li>
@@ -55,19 +55,19 @@ returns a token, use it on Header Authorization : Bearer :token
 
 #### Get All Seller
 
-end point /resource-seller
-method GET
+-   end point /resource-seller
+-   method GET
 
 #### Get Seller by id
 
-end point /resource-seller/:id
-method GET
+-   end point /resource-seller/:id
+-   method GET
 
 #### Add Seller
 
-end point /resource-seller
-method POST
-body :
+-   end point /resource-seller
+-   method POST
+-   body :
 
 <ul>
     <li>name : Seller1</li>
@@ -76,9 +76,9 @@ body :
 
 #### Update Seller
 
-end point /resource-seller/:id
-method PUT
-body :
+-   end point /resource-seller/:id
+-   method PUT
+-   body :
 
 <ul>
     <li>name : New Seller1</li>
@@ -87,8 +87,8 @@ body :
 
 #### Delete Seller
 
-end point /resource-seller/:id
-method DELETE
+-   end point /resource-seller/:id
+-   method DELETE
 
 <!-- Seller End -->
 
@@ -98,19 +98,19 @@ method DELETE
 
 #### Get All Product
 
-end point /resource-product
-method GET
+-   end point /resource-product
+-   method GET
 
 #### Get Product by id
 
-end point /resource-product/:id
-method GET
+-   end point /resource-product/:id
+-   method GET
 
 #### Add Product
 
-end point /resource-product
-method POST
-body :
+-   end point /resource-product
+-   method POST
+-   body :
 
 <ul>
     <li>name : Product1</li>
@@ -121,9 +121,9 @@ body :
 
 #### Update Product
 
-end point /resource-product/:id
-method PUT
-body :
+-   end point /resource-product/:id
+-   method PUT
+-   body :
 
 <ul>
     <li>name : new Product1</li>
@@ -134,7 +134,7 @@ body :
 
 #### Delete Seller
 
-end point /resource-product/:id
-method DELETE
+-   end point /resource-product/:id
+-   method DELETE
 
 <!-- Product End -->
