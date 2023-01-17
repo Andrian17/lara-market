@@ -37,11 +37,12 @@ class SellerAPIController extends Controller
         ]);
         if ($validator->fails()) return response()->json($validator->errors(), 400);
         $seller = $request->all();
-        Seller::create($seller);
+        $seller = Seller::create($seller);
         return response(
             [
                 "status" => 201,
-                "message" => "seller has save"
+                "message" => "seller has been saved",
+                "data" => $seller
             ],
             201
         );
@@ -55,7 +56,7 @@ class SellerAPIController extends Controller
      */
     public function show($id)
     {
-        $seller = Seller::with('products')->where('id', $id)->first();
+        $seller = Seller::with('products')->find($id);
         if ($seller) return new SellerResource($seller);
         return response([
             "message" => "seller not found"
@@ -81,8 +82,10 @@ class SellerAPIController extends Controller
         try {
             $status = Seller::where("id", $id)->update($request->all());
             if ($status) {
+                $seller = Seller::find($id);
                 return response([
                     "message" => "seller has updated",
+                    "data" => $seller
                 ]);
             }
             return response(
@@ -107,7 +110,7 @@ class SellerAPIController extends Controller
     {
         try {
             DB::beginTransaction();
-            $seller = Seller::where('id', $id)->first();
+            $seller = Seller::find($id);
             if (!$seller) {
                 return response([
                     "status" => 404,
@@ -120,7 +123,7 @@ class SellerAPIController extends Controller
             }
             DB::commit();
             return response(
-                ["message" => "seller has delete"],
+                ["message" => "seller has been removed"],
                 200
             );
             // return false;

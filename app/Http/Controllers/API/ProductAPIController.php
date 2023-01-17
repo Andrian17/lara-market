@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,11 +40,12 @@ class ProductAPIController extends Controller
         }
         $product = $request->all();
         $product["code_product"] = uniqid();
-        Product::create($product);
+        $product = Product::create($product);
         return response(
             [
                 "status" => 201,
-                "message" => "Product has save"
+                "message" => "product has been saved",
+                "data" => $product
             ],
             201
         );
@@ -59,7 +59,7 @@ class ProductAPIController extends Controller
      */
     public function show($id)
     {
-        $product = Product::where('id', $id)->with('seller')->first();
+        $product = Product::with('seller')->find($id);
         if ($product) {
             return new ProductResource($product);
         }
@@ -90,8 +90,10 @@ class ProductAPIController extends Controller
         try {
             $status = Product::where("id", $id)->update($request->all());
             if ($status) {
+                $product = Product::find($id);
                 return response([
-                    "message" => "product has updated",
+                    "message" => "product has been updated",
+                    "data" => $product
                 ]);
             }
             return response(
@@ -100,7 +102,7 @@ class ProductAPIController extends Controller
             );
         } catch (\Throwable $th) {
             return response(
-                ["message" => "failed update product"],
+                ["message" => "failed to update product"],
                 400
             );
         }
@@ -114,17 +116,17 @@ class ProductAPIController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::where('id', $id)->first();
+        $product = Product::find($id);
         if ($product) {
             $product->delete();
             return response([
                 "status" => 200,
-                "message" => "Product has delete!"
+                "message" => "Product has been removed"
             ], 200);
         }
         return response([
             "status" => 404,
-            "message" => 'failed remove the product'
+            "message" => 'failed to delete Product'
         ], 404);
     }
 }

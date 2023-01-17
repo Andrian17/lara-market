@@ -1,66 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Rest-API LaraMarket
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Development
 
-## About Laravel
+1. Install dependencies using composer install
+2. Generate the key using php artisan key:generate
+3. Start your MySQL server
+4. Run migration and seeder using php artisan migrate:fresh --seed
+5. Install javascript depedencies using npm install
+6. Bundle javascript depedencies using npm run dev
+7. Start development server using php artisan serve
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   Catatan
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Edit the env file if the db_username and db_password not the same
+2. Create a database like env file
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## How to used
 
-## Learning Laravel
+### Base URL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+end point http://127.0.0.1:8000/api/
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Register
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+end point /register
+method POST
+body :
 
-## Laravel Sponsors
+<ul>
+    <li>email : qwerty@gmail.com</li>
+    <li>name : Qwerty</li>
+    <li>password : qwerty</li>
+    <li>c_password : qwerty</li>
+</ul>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Login
 
-### Premium Partners
+end point /login
+method POST
+body :
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+<ul>
+    <li>email : qwerty@gmail.com</li>
+    <li>password : qwerty</li>
+</ul>
 
-## Contributing
+returns a token, use it on Header Authorization : Bearer :token
+!![token-aurh](/example/token_auth.png)
+!![token-aurh](/example/header_auth.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<!-- Seller Start -->
 
-## Code of Conduct
+### Seller
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Get All Seller
 
-## Security Vulnerabilities
+end point /resource-seller
+method GET
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Get Seller by id
 
-## License
+end point /resource-seller/:id
+method GET
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Add Seller
+
+end point /resource-seller
+method POST
+body :
+
+<ul>
+    <li>name : Seller1</li>
+    <li>address : Jl. Qwerty No. 12</li>
+</ul>
+
+#### Update Seller
+
+end point /resource-seller/:id
+method PUT
+body :
+
+<ul>
+    <li>name : New Seller1</li>
+    <li>address : New Jl. Qwerty No. 12</li>
+</ul>
+
+#### Delete Seller
+
+end point /resource-seller/:id
+method DELETE
+
+<!-- Seller End -->
+
+<!-- Product Start -->
+
+### Product
+
+#### Get All Product
+
+end point /resource-product
+method GET
+
+#### Get Product by id
+
+end point /resource-product/:id
+method GET
+
+#### Add Product
+
+end point /resource-product
+method POST
+body :
+
+<ul>
+    <li>name : Product1</li>
+    <li>price : 2000000</li>
+    <li>image_url : https://via.placeholder.com/320x240.png/006600?text=gadget+fuga</li>
+    <li>seller_id : select one id seller </li>
+</ul>
+
+#### Update Product
+
+end point /resource-product/:id
+method PUT
+body :
+
+<ul>
+    <li>name : new Product1</li>
+    <li>price : 4000000</li>
+    <li>image_url : https://via.placeholder.com/320x240.png/006600?text=gadget+fuga</li>
+    <li>seller_id : select one id seller </li>
+</ul>
+
+#### Delete Seller
+
+end point /resource-product/:id
+method DELETE
+
+<!-- Product End -->

@@ -48,7 +48,7 @@ class SellerController extends Controller
             Seller::create($validator);
             return redirect()->route('seller.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
-                                        Seller has saved
+                                        Seller has been saved
                                    </div>');
         }
     }
@@ -94,7 +94,7 @@ class SellerController extends Controller
             $seller->update($validator);
             return redirect()->route('seller.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
-                                        Seller has updated
+                                        Seller has been updated
                                    </div>');
         }
     }
@@ -115,7 +115,7 @@ class SellerController extends Controller
             }
             return redirect()->route('seller.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
-                                        Seller has deleted
+                                        Seller has been deleted
                                    </div>');
             DB::commit();
         } catch (\Exception $e) {

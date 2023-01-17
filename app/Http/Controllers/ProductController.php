@@ -50,7 +50,7 @@ class ProductController extends Controller
             Product::create($validator);
             return redirect()->route('product.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
-                                    Product has save
+                                    Product has been saved
                                </div>');
         }
     }
@@ -95,7 +95,7 @@ class ProductController extends Controller
             $product->update($validator);
             return redirect()->route('product.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
-                                        Product has updated
+                                        Product has been updated
                                    </div>');
         }
     }
@@ -112,7 +112,7 @@ class ProductController extends Controller
             $product->delete();
             return redirect()->route('product.index')
                 ->with('message', '<div class="alert alert-info" role="alert">
-                                        product has deleted
+                                        product has been deleted
                                     </div>');
         } catch (\Throwable $th) {
             return redirect()->route('product.index')

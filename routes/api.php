@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\API\ProductController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\ProductAPIController;
+use App\Http\Controllers\API\SellerAPIController;
 use Illuminate\Support\Facades\Route;
-use Spatie\FlareClient\Api;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,25 @@ use Spatie\FlareClient\Api;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('register', 'register')->name('register');
+    Route::post('login', 'login')->name('login');
+});
+Route::get('login', function () {
+    return "<h1>Login please!</h1>";
+});
+Route::get('register', function () {
+    return "<h1>Register please!</h1>";
+});
+Route::get('/', function () {
+    return "<h1>Hi</h1>";
 });
 
-Route::resource('/resource-product', App\Http\Controllers\API\ProductAPIController::class);
-Route::resource('/resource-seller', App\Http\Controllers\API\SellerAPIController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resource('/resource-product', ProductAPIController::class);
+    Route::resource('/resource-seller', SellerAPIController::class);
+});
